@@ -14,8 +14,9 @@ SELECT member                                                            AS reso
        project_id                                                        AS project_id,
        CASE
            WHEN
-                   ("role" IN ('roles/editor', 'roles/owner') OR
-                    "role" LIKE ANY (ARRAY ['%Admin', '%admin'])) AND "member" LIKE 'serviceAccount:%'
+                   ("role" IN ('roles/editor', 'roles/owner') 
+                   OR "role" LIKE ANY (ARRAY ['%Admin', '%admin']))
+                   AND "member" LIKE 'serviceAccount:%.iam.gserviceaccount.com'
                THEN 'fail'
            ELSE 'pass'
            END                                                           AS status
